@@ -1,5 +1,6 @@
 package bossharriscorporation.firebasedb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,8 +14,6 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Button mButtonRequests = (Button) findViewById(R.id.buttonRequests);
-        Button mButtonNew = (Button) findViewById(R.id.buttonNew);
-        final TextView mTextCondition = (TextView) findViewById(R.id.textViewWeather);                  //Text and button declarations
+        Button mbuttonRequests = (Button) findViewById(R.id.buttonRequests);
+        Button mbuttonNew = (Button) findViewById(R.id.buttonNew);
+        final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
         mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/test");                      //Links our database
         mref.authWithPassword("kiwi.198@gmail.com", "admin", new Firebase.AuthResultHandler() {
@@ -54,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String newCondition = (String) dataSnapshot.getValue();
-                mTextCondition.setText(newCondition);
+                //Fetches the information in database
+                /*String newCondition = (String) dataSnapshot.getValue();
+                mTextCondition.setText(newCondition); */
 
             }
 
@@ -66,18 +66,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mButtonRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
+        mbuttonRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
             @Override
             public void onClick(View v) {
-                mref.setValue("Sunny");
+               // mref.setValue("View your requests");
+
             }
 
         });
 
-        mButtonNew.setOnClickListener(new View.OnClickListener() {                                 //mButtonNew button set value "Rainy" to database
+        mbuttonNew.setOnClickListener(new View.OnClickListener() {                                 //mbuttonNew button set value "Rainy" to database
             @Override
             public void onClick(View v) {
-                mref.setValue("Rainy");
+                //mref.setValue("Create new request");
+                Intent intent2 = new Intent("bossharriscorporation.firebasedb.NewRequest");
+                startActivity(intent2);
             }
 
         });

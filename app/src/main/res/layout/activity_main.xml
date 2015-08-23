@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Dashboard"
-        android:id="@+id/textViewWeather"
+        android:id="@+id/textViewDashboard"
         android:layout_marginTop="31dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:text="New Request"
         android:id="@+id/buttonNew"
-        android:layout_below="@+id/textViewWeather"
-        android:layout_alignRight="@+id/textViewWeather"
-        android:layout_alignEnd="@+id/textViewWeather"
+        android:layout_below="@+id/textViewDashboard"
+        android:layout_alignRight="@+id/textViewDashboard"
+        android:layout_alignEnd="@+id/textViewDashboard"
         android:layout_marginTop="89dp" />
 </RelativeLayout>
