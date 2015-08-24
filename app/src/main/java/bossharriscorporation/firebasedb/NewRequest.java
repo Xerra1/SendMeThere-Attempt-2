@@ -19,7 +19,7 @@ import com.firebase.client.ValueEventListener;
 
 public class NewRequest extends AppCompatActivity {
 
-    AutoCompleteTextView goto_ac, from_ac;
+
     Button button_submit;
     String[] places = {
             "Kolej Tun Razak - KTR",                            //Kolej
@@ -48,6 +48,9 @@ public class NewRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_request);
 
+        AutoCompleteTextView goto_ac, from_ac;
+        final String user_destination, user_depart, user_time;
+
         goto_ac = (AutoCompleteTextView)findViewById(R.id.goto_ac);
         from_ac = (AutoCompleteTextView)findViewById(R.id.from_ac);
 
@@ -58,6 +61,9 @@ public class NewRequest extends AppCompatActivity {
 
         from_ac.setThreshold(3);
         from_ac.setAdapter(adapter);
+
+        user_destination = goto_ac.getText().toString();
+        user_depart = from_ac.getText().toString();
 
         button_submit = (Button)findViewById(R.id.button_submit);                                   //declare button
 
@@ -78,6 +84,7 @@ public class NewRequest extends AppCompatActivity {
                         System.out.println("The read failed: " + firebaseError.getMessage());
                     }
                 });
+
                 Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 //New Request
                 AuthData authData = mref.getAuth();
@@ -92,8 +99,8 @@ public class NewRequest extends AppCompatActivity {
                     Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
                     long newRidCounter = ridCounter[0] + 1;
                     request = request.child(Long.toString(newRidCounter));
-                    request.child("depart").setValue("KTHO");
-                    request.child("destination").setValue("K9");
+                    request.child("depart").setValue(user_depart);
+                    request.child("destination").setValue(user_destination);
                     request.child("time").setValue("9:00AM");
                     request.child("customer").setValue(uid);
                     //Link with User
