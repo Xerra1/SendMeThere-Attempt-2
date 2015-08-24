@@ -20,6 +20,7 @@ import com.firebase.client.ValueEventListener;
 public class NewRequest extends AppCompatActivity {
 
     AutoCompleteTextView goto_ac, from_ac;
+    final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
     long ridCounter;
     Button button_submit;
     String[] places = {
@@ -65,29 +66,12 @@ public class NewRequest extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {                               //sets it to listen to events
             @Override
             public void onClick(View v) {
-                //retrieve current max rid
-
-                final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
-                max_rid.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        System.out.println("database rid="+(long) snapshot.getValue());
-                        ridCounter = (long) snapshot.getValue();
-                        System.out.println("rid_counter="+ridCounter);
-                    }
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                        System.out.println("The read failed: " + firebaseError.getMessage());
-                    }
-                });
-                System.out.println("rid_counter=" + ridCounter);
                 Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 //New Request
                 AuthData authData = mref.getAuth();
                 if(authData == null) {
                     Intent intent1 = new Intent(".MainActivity");
                     startActivity(intent1);
-
                     Toast.makeText(getApplicationContext(),
                             "Please Login First", Toast.LENGTH_LONG).show();
                 } else {
@@ -96,7 +80,7 @@ public class NewRequest extends AppCompatActivity {
                     Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
                     long newRidCounter = ridCounter + 1;
                     request = request.child(Long.toString(newRidCounter));
-                    request.child("depart").setValue("KTHO");
+                    request.child("departure").setValue("KTHO");
                     request.child("destination").setValue("K9");
                     request.child("time").setValue("9:00AM");
                     request.child("customer").setValue(uid);
@@ -111,6 +95,23 @@ public class NewRequest extends AppCompatActivity {
 
             }
 
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //retrieve current max rid
+        max_rid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                ridCounter = (long) snapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
         });
     }
 
