@@ -36,19 +36,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
         mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/test");                      //Links our database
-        mref.authWithPassword("kiwi.198@gmail.com", "admin", new Firebase.AuthResultHandler() {
-            @Override
-            public void onAuthenticated(AuthData authData) {
-                System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
-                Firebase user = new Firebase("https://incandescent-heat-5066.firebaseio.com/"+authData.getUid());
-                user.child("name").setValue("Kiwi");
-            }
-
-            @Override
-            public void onAuthenticationError(FirebaseError firebaseError) {
-                // there was an error
-            }
-        });
 
         mref.addValueEventListener(new ValueEventListener() {                                       //Event listener will notify us of changes from database
 

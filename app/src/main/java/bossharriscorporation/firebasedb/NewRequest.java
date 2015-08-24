@@ -11,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -64,36 +65,45 @@ public class NewRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //retrieve current max rid
-                final int[] ridCounter = new int[1];
-                Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
+                final long[] ridCounter = new long[1];
+                final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
                 max_rid.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        ridCounter[0] = (int) snapshot.getValue();
+                        ridCounter[0] = (long) snapshot.getValue();
+                        max_rid.setValue(ridCounter[0] + 1);
                     }
                     @Override
                     public void onCancelled(FirebaseError firebaseError) {
                         System.out.println("The read failed: " + firebaseError.getMessage());
                     }
                 });
-
+                Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 //New Request
-                String uid = "kiwi";
-                Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
-                int newRidCounter = ridCounter[0] + 1;
-                request = request.child(Integer.toString(newRidCounter));
-                request.child("depart").setValue("KTHO");
-                request.child("destination").setValue("K9");
-                request.child("time").setValue("9:00AM");
-                request.child("customer").setValue(uid);
+                AuthData authData = mref.getAuth();
+                if(authData == null) {
+                    Intent intent1 = new Intent(".MainActivity");
+                    startActivity(intent1);
 
-                //Link with User
-                Firebase newRequest = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
-                newRequest = newRequest.child(uid).child("request");
-                newRequest.child(Integer.toString(newRidCounter)).setValue(true);
+                    Toast.makeText(getApplicationContext(),
+                            "Please Login First", Toast.LENGTH_LONG).show();
+                } else {
+                    String uid = authData.getUid();
+                    Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
+                    long newRidCounter = ridCounter[0] + 1;
+                    request = request.child(Long.toString(newRidCounter));
+                    request.child("depart").setValue("KTHO");
+                    request.child("destination").setValue("K9");
+                    request.child("time").setValue("9:00AM");
+                    request.child("customer").setValue(uid);
+                    //Link with User
+                    Firebase newRequest = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
+                    newRequest = newRequest.child(uid).child("request");
+                    newRequest.child(Long.toString(newRidCounter)).setValue(true);
 
-                Toast.makeText(getApplicationContext(),
-                        "Delivery request submitted!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),
+                            "Delivery request submitted!", Toast.LENGTH_LONG).show();
+                }
             }
 
         });
