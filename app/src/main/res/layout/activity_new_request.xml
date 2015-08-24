@@ -50,7 +50,38 @@
         android:text="Submit!"
         android:id="@+id/button_submit"
         android:onClick="buttonOnClick"
+        android:layout_marginBottom="34dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="101dp" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time : "
+        android:id="@+id/time_textView"
+        android:layout_below="@+id/from_ac"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="59dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Time Picker!"
+        android:id="@+id/button_time"
+        android:layout_alignTop="@+id/time_textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/time_textView2"
+        android:text="Select departure time"
+        android:layout_below="@+id/button_time"
+        android:layout_marginTop="31dp"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
