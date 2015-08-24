@@ -20,6 +20,8 @@ import com.firebase.client.ValueEventListener;
 public class NewRequest extends AppCompatActivity {
 
 
+    AutoCompleteTextView goto_ac, from_ac;
+    long ridCounter;
     Button button_submit;
     String[] places = {
             "Kolej Tun Razak - KTR",                            //Kolej
@@ -71,20 +73,21 @@ public class NewRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //retrieve current max rid
-                final long[] ridCounter = new long[1];
+
                 final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
-                max_rid.addValueEventListener(new ValueEventListener() {
+                max_rid.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        ridCounter[0] = (long) snapshot.getValue();
-                        max_rid.setValue(ridCounter[0] + 1);
+                        System.out.println("database rid="+(long) snapshot.getValue());
+                        ridCounter = (long) snapshot.getValue();
+                        System.out.println("rid_counter="+ridCounter);
                     }
                     @Override
                     public void onCancelled(FirebaseError firebaseError) {
                         System.out.println("The read failed: " + firebaseError.getMessage());
                     }
                 });
-
+                System.out.println("rid_counter=" + ridCounter);
                 Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 //New Request
                 AuthData authData = mref.getAuth();
@@ -96,8 +99,9 @@ public class NewRequest extends AppCompatActivity {
                             "Please Login First", Toast.LENGTH_LONG).show();
                 } else {
                     String uid = authData.getUid();
+                    //Add new request data for the request id
                     Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
-                    long newRidCounter = ridCounter[0] + 1;
+                    long newRidCounter = ridCounter + 1;
                     request = request.child(Long.toString(newRidCounter));
                     request.child("depart").setValue(user_depart);
                     request.child("destination").setValue(user_destination);
@@ -107,10 +111,11 @@ public class NewRequest extends AppCompatActivity {
                     Firebase newRequest = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
                     newRequest = newRequest.child(uid).child("request");
                     newRequest.child(Long.toString(newRidCounter)).setValue(true);
-
+                    max_rid.setValue(newRidCounter);
                     Toast.makeText(getApplicationContext(),
                             "Delivery request submitted!", Toast.LENGTH_LONG).show();
                 }
+
             }
 
         });
