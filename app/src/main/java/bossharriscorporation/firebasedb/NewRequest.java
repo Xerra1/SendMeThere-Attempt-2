@@ -28,7 +28,7 @@ public class NewRequest extends AppCompatActivity {
     static final int dialog_id = 0;
     int hour_x, minute_x;
     TextView time_textView2;
-
+    final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
     long ridCounter;
     Button button_submit, button_time;
     String[] places = {
@@ -79,29 +79,12 @@ public class NewRequest extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {                               //sets it to listen to events
             @Override
             public void onClick(View v) {
-                //retrieve current max rid
-
-                final Firebase max_rid = new Firebase("https://incandescent-heat-5066.firebaseio.com/common/rid_counter");
-                max_rid.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        System.out.println("database rid="+(long) snapshot.getValue());
-                        ridCounter = (long) snapshot.getValue();
-                        System.out.println("rid_counter="+ridCounter);
-                    }
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                        System.out.println("The read failed: " + firebaseError.getMessage());
-                    }
-                });
-                System.out.println("rid_counter=" + ridCounter);
                 Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 //New Request
                 AuthData authData = mref.getAuth();
                 if(authData == null) {
                     Intent intent1 = new Intent(".MainActivity");
                     startActivity(intent1);
-
                     Toast.makeText(getApplicationContext(),
                             "Please Login First", Toast.LENGTH_LONG).show();
                 } else {
@@ -164,6 +147,23 @@ public class NewRequest extends AppCompatActivity {
                     time_textView2.setText(time);
                 }
             };
+    @Override
+    public void onStart() {
+        super.onStart();
+        //retrieve current max rid
+        max_rid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                ridCounter = (long) snapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
