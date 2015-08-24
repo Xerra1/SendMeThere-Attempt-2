@@ -61,6 +61,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Firebase.setAndroidContext(this);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -264,24 +265,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            final boolean[] result = {false};
+            Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
+            mref.authWithPassword("kiwi.198@gmail.com", "admin", new Firebase.AuthResultHandler() {
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+                    result[0] = true;
+                }
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    // there was an error
+                }
+            });
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
-                return false;
+                return result[0];
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
             // TODO: register the new account here.
-            return true;
+            System.out.println("Result: " + result[0]);
+            return result[0];
         }
 
         @Override

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Button mButtonRequests = (Button) findViewById(R.id.buttonRequests);
-        Button mButtonNew = (Button) findViewById(R.id.ButtonNew);
+        Button mButtonNew = (Button) findViewById(R.id.buttonNew);
         final TextView mTextCondition = (TextView) findViewById(R.id.textViewWeather);                  //Text and button declarations
 
         mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/test");                      //Links our database
