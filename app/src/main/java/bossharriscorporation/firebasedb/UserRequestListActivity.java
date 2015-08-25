@@ -64,7 +64,7 @@ public class UserRequestListActivity extends AppCompatActivity {
                 Request r = (Request)parent.getAdapter().getItem(position);
                 // When clicked, show a toast with the TextView text
                 Toast.makeText(getApplicationContext(),
-                        "parant:" + r + ", pos:"+position, Toast.LENGTH_SHORT).show();
+                        "Sent:" + r.getRid(), Toast.LENGTH_SHORT).show();
             }
         });
     }

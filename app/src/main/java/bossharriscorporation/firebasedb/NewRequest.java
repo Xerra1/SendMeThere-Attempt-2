@@ -21,6 +21,10 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class NewRequest extends AppCompatActivity {
 
     String user_destination, user_depart, user_time;
@@ -91,20 +95,17 @@ public class NewRequest extends AppCompatActivity {
                     String uid = authData.getUid();
                     //Add new request data for the request id
                     Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
-                    long newRidCounter = ridCounter + 1;
-                    request = request.child(Long.toString(newRidCounter));
                     user_destination = goto_ac.getText().toString();
                     user_depart = from_ac.getText().toString();
+                    time_textView2.setText(user_time);
                     user_time = time_textView2.getText().toString();
-                    request.child("depart").setValue(user_depart);
-                    request.child("destination").setValue(user_destination);
-                    request.child("time").setValue(user_time);
-                    request.child("customer").setValue(uid);
+                    request = request.push();
+                    Request r = new Request(request.getKey(), user_depart, user_destination, user_time, uid);
+                    request.setValue(r);
                     //Link with User
                     Firebase newRequest = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
                     newRequest = newRequest.child(uid).child("request");
-                    newRequest.child(Long.toString(newRidCounter)).setValue(true);
-                    max_rid.setValue(newRidCounter);
+                    newRequest.child(request.getKey()).setValue(true);
                     Toast.makeText(getApplicationContext(),
                             "Delivery request submitted!", Toast.LENGTH_LONG).show();
                 }
@@ -142,10 +143,11 @@ public class NewRequest extends AppCompatActivity {
                     minute_x = minute;
                     //Toast.makeText(NewRequest.this, hour_x + " : " + minute_x, Toast.LENGTH_LONG).show();
 
-                    String time = String.valueOf(hour_x + minute_x);
-
-                    time_textView2.setText(time);
-                    button_time.setText(time);
+                    user_time = String.format("%02d", hour_x) + ":"
+                            + String.format("%02d", minute_x);
+                    //System.out.println("Time :" + result);
+                    time_textView2.setText(user_time);
+                    button_time.setText(user_time);
                 }
             };
     @Override

@@ -2,23 +2,20 @@ package bossharriscorporation.firebasedb;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-public class RequestListActivity extends AppCompatActivity {
+public class QuotationListActivity extends AppCompatActivity {
     ListView listView ;
 
     private Firebase mFirebaseRef;

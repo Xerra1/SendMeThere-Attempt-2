@@ -1,10 +1,12 @@
 package bossharriscorporation.firebasedb;
 
+import java.util.Map;
+
 /**
  * Created by Kiwi on 25/8/2015.
  */
 public class Request {
-    private String id;
+    private String rid;
     private String depart;
     private String destination;
     private String time;
@@ -15,15 +17,15 @@ public class Request {
     private Request() {
     }
 
-    Request(String id, String depart, String destination, String time, String customer) {
-        this.id = id;
+    Request(String rid, String depart, String destination, String time, String customer) {
+        this.rid = rid;
         this.depart = depart;
         this.destination = destination;
         this.time = time;
-        this.customer = customer;
     }
-    public String getId() {
-        return id;
+
+    public String getRid() {
+        return rid;
     }
 
     public String getDepart() {
