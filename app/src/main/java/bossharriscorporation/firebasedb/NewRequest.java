@@ -21,6 +21,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+
 public class NewRequest extends AppCompatActivity {
 
     String user_destination, user_depart, user_time;
@@ -95,6 +96,7 @@ public class NewRequest extends AppCompatActivity {
                     request = request.child(Long.toString(newRidCounter));
                     user_destination = goto_ac.getText().toString();
                     user_depart = from_ac.getText().toString();
+                    time_textView2.setText(user_time);
                     user_time = time_textView2.getText().toString();
                     request.child("depart").setValue(user_depart);
                     request.child("destination").setValue(user_destination);
@@ -142,9 +144,10 @@ public class NewRequest extends AppCompatActivity {
                     minute_x = minute;
                     //Toast.makeText(NewRequest.this, hour_x + " : " + minute_x, Toast.LENGTH_LONG).show();
 
-                    String time = String.valueOf(hour_x + minute_x);
+                    user_time = String.format("%02d", hour_x) + ":"
+                            + String.format("%02d", minute_x);
+                    //System.out.println("Time :" + result);
 
-                    time_textView2.setText(time);
                 }
             };
     @Override
