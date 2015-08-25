@@ -55,6 +55,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- Activity 4 : Driver's response -->
+        <activity
+            android:name=".Activity_driver"
+            android:label="@string/title_activity_activity_driver" >
+            <intent-filter>
+                <action android:name="bossharriscorporation.firebasedb.Activity_driver" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

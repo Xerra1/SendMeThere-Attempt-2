@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button mbuttonRequests = (Button) findViewById(R.id.buttonRequests);
         Button mbuttonNew = (Button) findViewById(R.id.buttonNew);
+        Button button_test1 = (Button)findViewById(R.id.button_test1);
        // final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
         mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/test");                      //Links our database
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mbuttonRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
             @Override
             public void onClick(View v) {
-               // mref.setValue("View your requests");
+                // mref.setValue("View your requests");
                 Intent intent2 = new Intent("bossharriscorporation.firebasedb.RequestList");
                 startActivity(intent2);
             }
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
 
+        });
+
+        button_test1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent("bossharriscorporation.firebasedb.Activity_driver");
+                startActivity(intent3);
+            }
         });
 
 

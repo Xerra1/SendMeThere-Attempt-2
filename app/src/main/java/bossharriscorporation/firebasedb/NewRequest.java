@@ -142,11 +142,11 @@ public class NewRequest extends AppCompatActivity {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute){
                     hour_x = hourOfDay;
                     minute_x = minute;
-                    //Toast.makeText(NewRequest.this, hour_x + " : " + minute_x, Toast.LENGTH_LONG).show();
 
                     user_time = String.format("%02d", hour_x) + ":"
                             + String.format("%02d", minute_x);
-                    //System.out.println("Time :" + result);
+                   // button_time = setText(user_time);
+
 
                 }
             };
