@@ -141,30 +141,15 @@ public class NewRequest extends AppCompatActivity {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute){
                     hour_x = hourOfDay;
                     minute_x = minute;
-                    //Toast.makeText(NewRequest.this, hour_x + " : " + minute_x, Toast.LENGTH_LONG).show();
 
                     user_time = String.format("%02d", hour_x) + ":"
                             + String.format("%02d", minute_x);
-                    //System.out.println("Time :" + result);
-                    time_textView2.setText(user_time);
-                    button_time.setText(user_time);
+                   // button_time = setText(user_time);
                 }
             };
     @Override
     public void onStart() {
         super.onStart();
-        //retrieve current max rid
-        max_rid.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                ridCounter = (long) snapshot.getValue();
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
     }
 
     @Override

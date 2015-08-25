@@ -50,7 +50,8 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
         mListener = this.mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-
+                System.out.println("Quotation Value:" + dataSnapshot.getValue());
+                System.out.println("Quoatation Key:" + dataSnapshot.getKey());
                 T model = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
                 String key = dataSnapshot.getKey();
 

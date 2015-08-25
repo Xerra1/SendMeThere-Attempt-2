@@ -63,6 +63,9 @@ public class UserRequestListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Request r = (Request)parent.getAdapter().getItem(position);
                 // When clicked, show a toast with the TextView text
+                Intent intent = new Intent("bossharriscorporation.firebasedb.QuotationList");
+                intent.putExtra("rid", r.getRid());
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(),
                         "Sent:" + r.getRid(), Toast.LENGTH_SHORT).show();
             }

@@ -19,11 +19,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Requests"
-        android:id="@+id/buttonRequests"
+        android:id="@+id/myRequests"
         android:layout_below="@+id/buttonNew"
         android:layout_alignLeft="@+id/buttonNew"
         android:layout_alignStart="@+id/buttonNew"
-        android:layout_marginTop="92dp" />
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All Requests"
+        android:id="@+id/allRequests"
+        android:layout_below="@+id/buttonNew"
+        android:layout_alignLeft="@+id/buttonNew"
+        android:layout_alignStart="@+id/buttonNew"
+        android:layout_marginTop="110dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,4 +44,13 @@
         android:layout_alignRight="@+id/textViewDashboard"
         android:layout_alignEnd="@+id/textViewDashboard"
         android:layout_marginTop="89dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buton to Driver&apos;s response"
+        android:id="@+id/button_test1"
+        android:layout_marginBottom="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

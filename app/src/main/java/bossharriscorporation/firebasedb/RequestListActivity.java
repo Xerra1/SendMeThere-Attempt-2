@@ -63,8 +63,9 @@ public class RequestListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Request r = (Request)parent.getAdapter().getItem(position);
                 // When clicked, show a toast with the TextView text
-                Toast.makeText(getApplicationContext(),
-                        "Sent:" + r.getRid(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent("bossharriscorporation.firebasedb.Activity_driver");
+                intent.putExtra("rid", r.getRid());
+                startActivity(intent);
             }
         });
     }

@@ -56,10 +56,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".QuotationListActivity"
+            android:label="@string/title_activity_quotation_list" >
+            <intent-filter>
+                <action android:name="bossharriscorporation.firebasedb.QuotationList" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".UserRequestListActivity"
             android:label="@string/title_activity_user_request_list" >
             <intent-filter>
                 <action android:name="bossharriscorporation.firebasedb.UserRequestList" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- Activity 4 : Driver's response -->
+        <activity
+            android:name=".Activity_driver"
+            android:label="@string/title_activity_activity_driver" >
+            <intent-filter>
+                <action android:name="bossharriscorporation.firebasedb.Activity_driver" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

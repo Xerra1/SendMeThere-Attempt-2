@@ -20,20 +20,20 @@ public class QuotationListActivity extends AppCompatActivity {
 
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
-    private RequestListAdapter mRequestListAdapter;
+    private QuotationListAdapter mQuotationListAdapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_list);
-        listView = (ListView) findViewById(R.id.requestList);
+        setContentView(R.layout.activity_quotation_list);
+        listView = (ListView) findViewById(R.id.quotationList);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Setup our view and list adapter. Ensure it scrolls to the bottom as data changes
-        listView = (ListView) findViewById(R.id.requestList);
+        listView = (ListView) findViewById(R.id.quotationList);
         // Tell our list adapter that we only want 50 messages at a time
         mFirebaseRef = new Firebase( "https://incandescent-heat-5066.firebaseio.com/");
         AuthData authData = mFirebaseRef.getAuth();
@@ -44,24 +44,25 @@ public class QuotationListActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "Please Login First", Toast.LENGTH_LONG).show();
         } else {
-            mFirebaseRef = mFirebaseRef.child("request");
-            mRequestListAdapter = new RequestListAdapter(mFirebaseRef.limit(50), this, R.layout.request);
-            listView.setAdapter(mRequestListAdapter);
-            mRequestListAdapter.registerDataSetObserver(new DataSetObserver() {
+            String rid = getIntent().getExtras().getString("rid");
+            mFirebaseRef = mFirebaseRef.child("user").child(authData.getUid()).child("request").child(rid).child("quotation");
+            mQuotationListAdapter = new QuotationListAdapter(mFirebaseRef.limit(50), this, R.layout.quotation);
+            listView.setAdapter(mQuotationListAdapter);
+            mQuotationListAdapter.registerDataSetObserver(new DataSetObserver() {
                 @Override
                 public void onChanged() {
                     super.onChanged();
-                    listView.setSelection(mRequestListAdapter.getCount() - 1);
+                    listView.setSelection(mQuotationListAdapter.getCount() - 1);
                 }
             });
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Request r = (Request)parent.getAdapter().getItem(position);
+                Quotation q = (Quotation)parent.getAdapter().getItem(position);
                 // When clicked, show a toast with the TextView text
                 Toast.makeText(getApplicationContext(),
-                        "Sent:" + r.getRid(), Toast.LENGTH_SHORT).show();
+                        "Sent:" + q.getQid(), Toast.LENGTH_SHORT).show();
             }
         });
     }

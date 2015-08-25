@@ -267,7 +267,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // TODO: attempt authentication against a network service.
             final boolean[] result = {false};
             Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
-            mref.authWithPassword("kiwi.198@gmail.com", "admin", new Firebase.AuthResultHandler() {
+            mref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
                     System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
