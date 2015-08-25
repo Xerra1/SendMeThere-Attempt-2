@@ -55,6 +55,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UserRequestListActivity"
+            android:label="@string/title_activity_user_request_list" >
+            <intent-filter>
+                <action android:name="bossharriscorporation.firebasedb.UserRequestList" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

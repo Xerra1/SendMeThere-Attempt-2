@@ -4,7 +4,7 @@ package bossharriscorporation.firebasedb;
  * Created by Kiwi on 25/8/2015.
  */
 public class Request {
-    private String departure;
+    private String depart;
     private String destination;
     private String time;
     private String customer;
@@ -14,15 +14,15 @@ public class Request {
     private Request() {
     }
 
-    Request(String departure, String destination, String time, String customer) {
-        this.departure = departure;
+    Request(String depart, String destination, String time, String customer) {
+        this.depart = depart;
         this.destination = destination;
         this.time = time;
         this.customer = customer;
     }
 
-    public String getDeparture() {
-        return departure;
+    public String getDepart() {
+        return depart;
     }
 
     public String getDestination() {
@@ -39,6 +39,6 @@ public class Request {
 
     @Override
     public String toString() {
-        return time + ": " + departure + ", " + destination;
+        return time + ": " + depart + ", " + destination;
     }
 }

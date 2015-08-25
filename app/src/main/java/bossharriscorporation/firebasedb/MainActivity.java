@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +37,35 @@ public class MainActivity extends AppCompatActivity {
         Button mbuttonNew = (Button) findViewById(R.id.buttonNew);
        // final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
-        mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/test");                      //Links our database
+        mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");                      //Links our database
+        Query query = mref.orderByKey().equalTo("5");
+
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                System.out.println("Request DataSnap:" + dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
         mref.addValueEventListener(new ValueEventListener() {                                       //Event listener will notify us of changes from database
 
@@ -58,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // mref.setValue("View your requests");
-                Intent intent2 = new Intent("bossharriscorporation.firebasedb.RequestList");
+                Intent intent2 = new Intent("bossharriscorporation.firebasedb.UserRequestList");
                 startActivity(intent2);
             }
 

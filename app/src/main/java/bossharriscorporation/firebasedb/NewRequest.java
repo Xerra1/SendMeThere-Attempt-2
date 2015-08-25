@@ -145,6 +145,7 @@ public class NewRequest extends AppCompatActivity {
                     String time = String.valueOf(hour_x + minute_x);
 
                     time_textView2.setText(time);
+                    button_time.setText(time);
                 }
             };
     @Override
