@@ -259,7 +259,7 @@ public abstract class FirebaseJoinListAdapter<T> extends BaseAdapter {
         mModels.clear();
         mKeys.clear();
     }
-    
+
     @Override
     public int getCount() {
         return mModels.size();

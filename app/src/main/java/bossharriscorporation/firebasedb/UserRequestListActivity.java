@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
@@ -55,6 +58,15 @@ public class UserRequestListActivity extends AppCompatActivity {
                 }
             });
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Request r = (Request)parent.getAdapter().getItem(position);
+                // When clicked, show a toast with the TextView text
+                Toast.makeText(getApplicationContext(),
+                        "parant:" + r + ", pos:"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
