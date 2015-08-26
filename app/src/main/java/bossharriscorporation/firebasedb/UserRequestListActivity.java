@@ -19,10 +19,9 @@ import com.firebase.client.ValueEventListener;
 public class UserRequestListActivity extends AppCompatActivity {
     ListView listView ;
 
-    private Firebase mKeyFirebaseRef;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
-    private UserRequestListAdapter mUserRequestListAdapter;
+    private RequestListAdapter mUserRequestListAdapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class UserRequestListActivity extends AppCompatActivity {
         // Setup our view and list adapter. Ensure it scrolls to the bottom as data changes
         listView = (ListView) findViewById(R.id.requestList);
         // Tell our list adapter that we only want 50 messages at a time
-        mKeyFirebaseRef = new Firebase( "https://incandescent-heat-5066.firebaseio.com/user");
         mFirebaseRef = new Firebase( "https://incandescent-heat-5066.firebaseio.com/request");
         AuthData authData = mFirebaseRef.getAuth();
         if(authData == null) {
@@ -47,8 +45,8 @@ public class UserRequestListActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "Please Login First", Toast.LENGTH_LONG).show();
         } else {
-            mKeyFirebaseRef = mKeyFirebaseRef.child(authData.getUid()).child("request");
-            mUserRequestListAdapter = new UserRequestListAdapter(mKeyFirebaseRef, mFirebaseRef, this, R.layout.request);
+            mFirebaseRef = mFirebaseRef;
+            mUserRequestListAdapter = new RequestListAdapter(mFirebaseRef.orderByChild("customer").equalTo(authData.getUid()), this, R.layout.request);
             listView.setAdapter(mUserRequestListAdapter);
             mUserRequestListAdapter.registerDataSetObserver(new DataSetObserver() {
                 @Override

@@ -48,7 +48,7 @@ public class RequestListActivity extends AppCompatActivity {
                     "Please Login First", Toast.LENGTH_LONG).show();
         } else {
             mFirebaseRef = mFirebaseRef.child("request");
-            mRequestListAdapter = new RequestListAdapter(mFirebaseRef.limit(50), this, R.layout.request);
+            mRequestListAdapter = new RequestListAdapter(mFirebaseRef, this, R.layout.request);
             listView.setAdapter(mRequestListAdapter);
             mRequestListAdapter.registerDataSetObserver(new DataSetObserver() {
                 @Override

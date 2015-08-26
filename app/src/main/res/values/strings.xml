@@ -7,5 +7,5 @@
     <string name="title_activity_request_list">Request List</string>
     <string name="title_activity_user_request_list">User Request List</string>
     <string name="title_activity_activity_driver">Activity_driver</string>
-    <string name="title_activity_quotation_list">My Quotationr</string>
+    <string name="title_activity_quotation_list">My Quotation</string>
 </resources>

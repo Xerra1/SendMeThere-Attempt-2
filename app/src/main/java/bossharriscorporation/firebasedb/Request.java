@@ -22,6 +22,7 @@ public class Request {
         this.depart = depart;
         this.destination = destination;
         this.time = time;
+        this.customer = customer;
     }
 
     public String getRid() {

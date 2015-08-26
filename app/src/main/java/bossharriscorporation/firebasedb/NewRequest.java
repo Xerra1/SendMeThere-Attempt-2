@@ -102,12 +102,6 @@ public class NewRequest extends AppCompatActivity {
                     request = request.push();
                     Request r = new Request(request.getKey(), user_depart, user_destination, user_time, uid);
                     request.setValue(r);
-                    //Link with User
-                    Firebase newRequest = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
-                    newRequest = newRequest.child(uid).child("request");
-                    newRequest.child(request.getKey()).setValue(true);
-                    Toast.makeText(getApplicationContext(),
-                            "Delivery request submitted!", Toast.LENGTH_LONG).show();
                 }
 
             }

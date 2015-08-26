@@ -45,8 +45,8 @@ public class QuotationListActivity extends AppCompatActivity {
                     "Please Login First", Toast.LENGTH_LONG).show();
         } else {
             String rid = getIntent().getExtras().getString("rid");
-            mFirebaseRef = mFirebaseRef.child("user").child(authData.getUid()).child("request").child(rid).child("quotation");
-            mQuotationListAdapter = new QuotationListAdapter(mFirebaseRef.limit(50), this, R.layout.quotation);
+            mFirebaseRef = mFirebaseRef.child("quotation").child(rid);
+            mQuotationListAdapter = new QuotationListAdapter(mFirebaseRef, this, R.layout.quotation);
             listView.setAdapter(mQuotationListAdapter);
             mQuotationListAdapter.registerDataSetObserver(new DataSetObserver() {
                 @Override

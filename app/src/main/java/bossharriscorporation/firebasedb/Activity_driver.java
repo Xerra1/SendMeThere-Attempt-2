@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
+import com.firebase.client.Query;
 
 public class Activity_driver extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class Activity_driver extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
+                Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
                 AuthData authData = mref.getAuth();
                 if (authData == null) {
                     Intent intent1 = new Intent(".MainActivity");
@@ -48,14 +49,13 @@ public class Activity_driver extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Please Login First", Toast.LENGTH_LONG).show();
                 } else {
-                    String uid = authData.getUid();
                     String rid = getIntent().getExtras().getString("rid");
-                    mref = mref.child(uid).child("request").child(rid).child("quotation");
+                    mref = mref.child("quotation").child(rid);
                     mref = mref.push();
                     String qid = mref.getKey();
                     driver_price = price_editText.getText().toString();
                     driver_contact = contact_editText.getText().toString();
-                    Quotation quotation = new Quotation(qid, "RM " + driver_price, driver_time, driver_contact);
+                    Quotation quotation = new Quotation(qid, "RM " + driver_price, driver_time, driver_contact, rid);
                     mref.setValue(quotation);
 
                     Toast.makeText(getApplicationContext(),
