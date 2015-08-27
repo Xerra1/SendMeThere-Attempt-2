@@ -87,6 +87,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
+        Button button_register = (Button) findViewById(R.id.button_register);
+        button_register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptRegister();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -146,6 +154,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+    }
+
+    public void attemptRegister(){
+        Intent intentReg = new Intent("bossharriscorporation.firebasedb.Register");
+        startActivity(intentReg);
+
     }
 
     private boolean isEmailValid(String email) {

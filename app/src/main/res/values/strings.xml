@@ -8,4 +8,10 @@
     <string name="title_activity_user_request_list">User Request List</string>
     <string name="title_activity_activity_driver">Activity_driver</string>
     <string name="title_activity_quotation_list">My Quotation</string>
+    <string name="title_activity_register">Register</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="Enter_email">Enter your Email</string>
 </resources>
