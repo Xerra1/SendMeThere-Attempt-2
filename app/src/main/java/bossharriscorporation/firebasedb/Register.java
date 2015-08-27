@@ -12,17 +12,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.Firebase;
+
 
 public class Register extends AppCompatActivity {
 
     EditText password_et, confirm_password_et, email_et;        //et = EditText
-    Button register;
+    Button register, button_login;
     String get_email, get_password, get_confirmed_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        register_please();
+    }
+
+
+    public void register_please() {
+
 
         register = (Button) findViewById(R.id.button_registered);
 
@@ -42,14 +51,19 @@ public class Register extends AppCompatActivity {
                 if (!get_password.equals(get_confirmed_password))
                     confirm_password_et.setError("Passwords did not match, please re-enter your password.");
 
-                else {
-                    Intent registered = new Intent("bossharriscorporation.firebasedb.LoginActivity");
-                    startActivity(registered);
-                }
-
+                createUser(get_email, get_password);
+                /*Intent registered = new Intent("bossharriscorporation.firebasedb.LoginActivity");
+                startActivity(registered);*/
             }
         });
     }
+
+
+
+        public void createUser(String email, String password, Firebase.ResultHandler){
+
+
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
