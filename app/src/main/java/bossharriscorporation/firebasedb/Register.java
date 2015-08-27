@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -40,12 +39,13 @@ public class Register extends AppCompatActivity {
                 get_confirmed_password = confirm_password_et.getText().toString();
 
                 //Checks for error
-                if (get_password != get_confirmed_password)
+                if (!get_password.equals(get_confirmed_password))
                     confirm_password_et.setError("Passwords did not match, please re-enter your password.");
 
-
-                Intent registered = new Intent("bossharriscorporation.firebasedb.LoginActivity");
-                startActivity(registered);
+                else {
+                    Intent registered = new Intent("bossharriscorporation.firebasedb.LoginActivity");
+                    startActivity(registered);
+                }
 
             }
         });
