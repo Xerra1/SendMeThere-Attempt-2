@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.ChildEventListener;
@@ -37,54 +38,30 @@ public class MainActivity extends AppCompatActivity {
         Button allRequests = (Button) findViewById(R.id.allRequests);
         Button mbuttonNew = (Button) findViewById(R.id.buttonNew);
         Button button_test1 = (Button)findViewById(R.id.button_test1);
+        final TextView welcomeMsg = (TextView)findViewById(R.id.textViewDashboard);
        // final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
-        mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");                      //Links our database
-        Query query = mref.orderByKey().equalTo("5");
+        mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");                      //Links our database
+        final AuthData authData = mref.getAuth();
+        if(authData == null) {
+            Intent intent1 = new Intent("android.intent.action.MAIN");
+            startActivity(intent1);
+            Toast.makeText(getApplicationContext(),
+                    "Please Login First", Toast.LENGTH_LONG).show();
+        } else {
+            mref = mref.child(authData.getUid()).child("userType");
+            mref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    welcomeMsg.setText("Welcome, I'm a " + snapshot.getValue());
+                }
 
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("Request DataSnap:" + dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-        mref.addValueEventListener(new ValueEventListener() {                                       //Event listener will notify us of changes from database
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Fetches the information in database
-                /*String newCondition = (String) dataSnapshot.getValue();
-                mTextCondition.setText(newCondition); */
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-
-            }
-        });
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                    System.out.println("The read failed: " + firebaseError.getMessage());
+                }
+            });
+        }
 
         myRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
             @Override

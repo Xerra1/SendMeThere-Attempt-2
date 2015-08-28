@@ -66,6 +66,8 @@ public class Register extends AppCompatActivity {
                         ref.authWithPassword(get_email, get_password, new Firebase.AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
+                                Firebase userType = ref.child(authData.getUid()).child("userType");
+                                userType.setValue("customer");
                                 Intent intent1 = new Intent(".MainActivity");
                                 startActivity(intent1);
                             }
