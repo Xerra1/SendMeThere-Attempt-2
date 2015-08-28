@@ -1,9 +1,13 @@
 package bossharriscorporation.firebasedb;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 
 public class Register extends AppCompatActivity {
@@ -48,22 +54,44 @@ public class Register extends AppCompatActivity {
                 get_confirmed_password = confirm_password_et.getText().toString();
 
                 //Checks for error
-                if (!get_password.equals(get_confirmed_password))
+                if (!get_password.equals(get_confirmed_password)) {
                     confirm_password_et.setError("Passwords did not match, please re-enter your password.");
+                    return;
+                }
 
-                createUser(get_email, get_password);
+                final Firebase ref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
+                ref.createUser(get_email, get_password, new Firebase.ResultHandler() {
+                    @Override
+                    public void onSuccess() {
+                        ref.authWithPassword(get_email, get_password, new Firebase.AuthResultHandler() {
+                            @Override
+                            public void onAuthenticated(AuthData authData) {
+                                Intent intent1 = new Intent(".MainActivity");
+                                startActivity(intent1);
+                            }
+
+                            @Override
+                            public void onAuthenticationError(FirebaseError firebaseError) {
+                                // there was an error
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(FirebaseError firebaseError) {
+                        System.out.println("Error:" + firebaseError.getMessage());
+                        if (firebaseError.getCode() == FirebaseError.EMAIL_TAKEN) {
+                            email_et.setError("E-mail Taken!");
+                        } else {
+                            register.setError("Unknow Error, Please Try again");
+                        }
+                    }
+                });
                 /*Intent registered = new Intent("bossharriscorporation.firebasedb.LoginActivity");
                 startActivity(registered);*/
             }
         });
     }
-
-
-
-        public void createUser(String email, String password, Firebase.ResultHandler){
-
-
-        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
