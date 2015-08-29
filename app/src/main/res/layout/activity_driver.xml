@@ -91,8 +91,21 @@
         android:layout_height="40dp"
         android:background="@drawable/submit"
         android:id="@+id/button_submit"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/timeDisplay"
+        android:layout_alignLeft="@+id/button_time"
+        android:layout_alignStart="@+id/button_time" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/timeDisplay"
+        android:text="Select departure time"
+        android:textColor="#FFFF00"
         android:layout_below="@+id/button_time"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/offer_textView"
+        android:layout_alignEnd="@+id/offer_textView"
+        android:layout_marginTop="25dp" />
 
 </RelativeLayout>

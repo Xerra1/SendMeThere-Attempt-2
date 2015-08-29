@@ -97,7 +97,6 @@ public class NewRequest extends AppCompatActivity {
                     Firebase request = new Firebase("https://incandescent-heat-5066.firebaseio.com/request");
                     user_destination = goto_ac.getText().toString();
                     user_depart = from_ac.getText().toString();
-                    time_textView2.setText(user_time);
                     user_time = time_textView2.getText().toString();
                     request = request.push();
                     Request r = new Request(request.getKey(), user_depart, user_destination, user_time, uid);
@@ -112,7 +111,7 @@ public class NewRequest extends AppCompatActivity {
 
     public void showTimePickerDialog(){
         button_time = (Button)findViewById(R.id.button_time);
-        button_time.setOnClickListener(new View.OnClickListener(){
+        button_time.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -140,6 +139,7 @@ public class NewRequest extends AppCompatActivity {
                     user_time = String.format("%02d", hour_x) + ":"
                             + String.format("%02d", minute_x);
                    // button_time = setText(user_time);
+                    time_textView2.setText(user_time);
                 }
             };
     @Override

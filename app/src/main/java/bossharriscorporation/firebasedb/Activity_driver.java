@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -97,6 +98,8 @@ public class Activity_driver extends AppCompatActivity {
 
                     driver_time = String.format("%02d", hour_x) + ":"
                             + String.format("%02d", minute_x);
+                    TextView time_textView2 = (TextView) findViewById(R.id.timeDisplay);
+                    time_textView2.setText(driver_time);
 
 
                 }
