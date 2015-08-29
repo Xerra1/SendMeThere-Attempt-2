@@ -60,6 +60,7 @@ public class Activity_driver extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(),
                             "Offer submitted!", Toast.LENGTH_LONG).show();
+                    finish();
 
                 }
             }

@@ -102,6 +102,7 @@ public class NewRequest extends AppCompatActivity {
                     request = request.push();
                     Request r = new Request(request.getKey(), user_depart, user_destination, user_time, uid);
                     request.setValue(r);
+                    finish();
                 }
 
             }
