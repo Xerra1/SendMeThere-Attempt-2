@@ -172,7 +172,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     /**
@@ -283,11 +283,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             final boolean[] result = {false};
-            final Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
+            final Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/user");
             mref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
-                    mref.addValueEventListener(new ValueEventListener() {
+                    Firebase type = mref.child(authData.getUid()).child("userType");
+                    type.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
                             userType = (String)snapshot.getValue();
@@ -325,7 +326,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             if (success) {
                 Intent intent1;
                 if(userType.equals("driver")) {
-                    intent1 = new Intent(".MainActivity");
+                    intent1 = new Intent("bossharriscorporation.firebasedb.RequestList");
                 }
                 else {
                     intent1 = new Intent(".MainActivity");

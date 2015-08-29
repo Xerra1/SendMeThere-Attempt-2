@@ -14,4 +14,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="enter_password">Enter Password</string>
     <string name="Enter_email">Enter your Email</string>
+    <string name="title_activity_driver_dashboard">driver_dashboard</string>
 </resources>

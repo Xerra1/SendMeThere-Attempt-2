@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Button myRequests = (Button) findViewById(R.id.myRequests);
-        Button allRequests = (Button) findViewById(R.id.allRequests);
+        //Button allRequests = (Button) findViewById(R.id.allRequests);
         Button mbuttonNew = (Button) findViewById(R.id.buttonNew);
-        Button button_test1 = (Button)findViewById(R.id.button_test1);
+       // Button button_test1 = (Button)findViewById(R.id.button_test1);
         final TextView welcomeMsg = (TextView)findViewById(R.id.textViewDashboard);
        // final TextView mTextCondition = (TextView) findViewById(R.id.textViewDashboard);                  //Text and button declarations
 
@@ -73,21 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        allRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
+        /*allRequests.setOnClickListener(new View.OnClickListener() {                                 //mButtonSunny button set value "Sunny" to database
             @Override
             public void onClick(View v) {
                 // mref.setValue("View your requests");
                 Intent intent2 = new Intent("bossharriscorporation.firebasedb.RequestList");
-                startActivity(intent2);
-            }
-
-        });
-
-        mbuttonNew.setOnClickListener(new View.OnClickListener() {                                 //mbuttonNew button set value "Rainy" to database
-            @Override
-            public void onClick(View v) {
-                //mref.setValue("Create new request");
-                Intent intent2 = new Intent("bossharriscorporation.firebasedb.NewRequest");
                 startActivity(intent2);
             }
 
@@ -100,7 +90,19 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent3 = new Intent("bossharriscorporation.firebasedb.Activity_driver");
                 startActivity(intent3);
             }
+        }); */
+
+        mbuttonNew.setOnClickListener(new View.OnClickListener() {                                 //mbuttonNew button set value "Rainy" to database
+            @Override
+            public void onClick(View v) {
+                //mref.setValue("Create new request");
+                Intent intent2 = new Intent("bossharriscorporation.firebasedb.NewRequest");
+                startActivity(intent2);
+            }
+
         });
+
+
 
 
     }
