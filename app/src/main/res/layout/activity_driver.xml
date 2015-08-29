@@ -103,6 +103,7 @@
         android:id="@+id/timeDisplay"
         android:text="Select departure time"
         android:textColor="#FFFF00"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_time"
         android:layout_alignRight="@+id/offer_textView"
         android:layout_alignEnd="@+id/offer_textView"

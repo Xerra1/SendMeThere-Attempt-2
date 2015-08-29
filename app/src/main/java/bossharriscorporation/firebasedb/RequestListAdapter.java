@@ -24,7 +24,7 @@ public class RequestListAdapter extends FirebaseListAdapter<Request> {
         String time = request.getTime();;
         TextView timeText = (TextView) view.findViewById(R.id.time);
         timeText.setText(time + ": ");
-        ((TextView) view.findViewById(R.id.departure)).setText(departure);
-        ((TextView) view.findViewById(R.id.destination)).setText(destination);
+        ((TextView) view.findViewById(R.id.departure)).setText("From: " + departure);
+        ((TextView) view.findViewById(R.id.destination)).setText("To: " + destination);
     }
 }

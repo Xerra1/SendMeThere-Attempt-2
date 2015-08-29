@@ -24,7 +24,7 @@ public class QuotationListAdapter extends FirebaseListAdapter<Quotation> {
         String contactNo = quotation.getContactNo();
         TextView priceText = (TextView) view.findViewById(R.id.price);
         priceText.setText(price);
-        ((TextView) view.findViewById(R.id.pickUpTime)).setText(pickUpTime);
-        ((TextView) view.findViewById(R.id.contactNo)).setText(contactNo);
+        ((TextView) view.findViewById(R.id.pickUpTime)).setText("Pick Up Time: " + pickUpTime);
+        ((TextView) view.findViewById(R.id.contactNo)).setText("Contact: " + contactNo);
     }
 }
