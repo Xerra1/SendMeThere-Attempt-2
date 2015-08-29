@@ -28,8 +28,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,10 +283,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             final boolean[] result = {false};
-            Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
+            final Firebase mref = new Firebase("https://incandescent-heat-5066.firebaseio.com/");
             mref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
+                    mref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            userType = (String)snapshot.getValue();
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                            System.out.println("The read failed: " + firebaseError.getMessage());
+                        }
+                    });
                     System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
                     result[0] = true;
                 }
@@ -309,7 +323,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                Intent intent1 = new Intent(".MainActivity");
+                Intent intent1;
+                if(userType.equals("driver")) {
+                    intent1 = new Intent(".MainActivity");
+                }
+                else {
+                    intent1 = new Intent(".MainActivity");
+                }
                 startActivity(intent1);
                 finish();
             } else {
