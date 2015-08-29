@@ -67,10 +67,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Firebase.setAndroidContext(this);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.driverID);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = (EditText) findViewById(R.id.passDriver);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -82,7 +82,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.loginButton);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,11 +90,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        Button button_register = (Button) findViewById(R.id.button_register);
+        TextView button_register = (TextView) findViewById(R.id.register);
         button_register.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptRegister();
+            }
+        });
+
+        TextView howTo = (TextView) findViewById(R.id.notYet);
+        howTo.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View arg0) {
+                //Starting a new Intent
+                Intent Registration = new Intent("bossharriscorporation.firebasedb.DriverReg");
+                startActivity(Registration);
+
             }
         });
 

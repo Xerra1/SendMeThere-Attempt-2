@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#7b1113"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="About us"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="normal|italic"
+        android:typeface="normal"
+        android:textSize="50dp"
+        android:textColor="#ffff00"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView2"
+        android:background="@drawable/stm_pic"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.35"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:layout_width="320dp" android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="SendMeThere is a startup that is revitalizing the UTM car delivery services industry. We want to improve the safety and efficiency of our Deliverys by leveraging on advancements in GPS and mobile technology.  As a for-profit social enterprise, we believe that business and social value can be achieved in parallel."
+        android:id="@+id/textView4"
+        android:layout_weight="0.35"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
