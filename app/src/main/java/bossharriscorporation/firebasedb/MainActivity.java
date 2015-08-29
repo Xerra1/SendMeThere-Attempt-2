@@ -90,12 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
+            Intent intent = new Intent("bossharriscorporation.firebasedb.AboutActivity");
+            startActivity(intent);
             return true;
         }
 

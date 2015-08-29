@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -112,7 +114,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
+    
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
     }
@@ -302,7 +304,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     type.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
-                            userType = (String)snapshot.getValue();
+                            userType = (String) snapshot.getValue();
                         }
 
                         @Override
@@ -313,6 +315,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
                     result[0] = true;
                 }
+
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
@@ -336,10 +339,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 Intent intent1;
-                if(userType.equals("driver")) {
+                if (userType.equals("driver")) {
                     intent1 = new Intent("bossharriscorporation.firebasedb.RequestList");
-                }
-                else {
+                } else {
                     intent1 = new Intent(".MainActivity");
                 }
                 startActivity(intent1);

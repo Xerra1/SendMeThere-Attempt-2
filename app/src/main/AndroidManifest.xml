@@ -105,6 +105,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Activity 6 : Help Driver Register -->
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_register" >
+            <intent-filter>
+                <action android:name="bossharriscorporation.firebasedb.AboutActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

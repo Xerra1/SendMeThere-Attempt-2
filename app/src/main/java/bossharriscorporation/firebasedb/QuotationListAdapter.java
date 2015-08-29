@@ -21,8 +21,10 @@ public class QuotationListAdapter extends FirebaseListAdapter<Quotation> {
         // Map a Chat object to an entry in our listview
         String price = quotation.getPrice();
         String pickUpTime = quotation.getPickUpTime();
+        String contactNo = quotation.getContactNo();
         TextView priceText = (TextView) view.findViewById(R.id.price);
-        priceText.setText(price + ": ");
+        priceText.setText(price);
         ((TextView) view.findViewById(R.id.pickUpTime)).setText(pickUpTime);
+        ((TextView) view.findViewById(R.id.contactNo)).setText(contactNo);
     }
 }
